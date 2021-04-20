@@ -1,3 +1,7 @@
+##################################################################################################################################
+# THIS PROJECT USES FRACTION OF ABSORBED PHOTOSYNTHETICALLY ACTIVE RADIATION (FAPAR) TO DETECT DROUGHT YEARS IN KENTYA ###########
+##################################################################################################################################
+
 install.packages("rasterVis")
 install.packages("RColorBrewer")
 install.packages("ggspatial")
@@ -17,7 +21,7 @@ library(sf)
 library(tibble)
 library(lubridate)
 library(xts) 
-library(dygraphs)
+#library(dygraphs)
 library(tidyr)
 library(gganimate)
 library(hrbrthemes)
