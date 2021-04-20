@@ -1,5 +1,5 @@
 ##################################################################################################################################
-# THIS PROJECT USES FRACTION OF ABSORBED PHOTOSYNTHETICALLY ACTIVE RADIATION (FAPAR) TO DETECT DROUGHT YEARS IN KENTYA ###########
+# THIS PROJECT USES FRACTION OF ABSORBED PHOTOSYNTHETICALLY ACTIVE RADIATION (FAPAR) TO DETECT DROUGHT YEARS IN KENYA ###########
 ##################################################################################################################################
 
 install.packages("rasterVis")
@@ -42,7 +42,7 @@ ROI <-  ROI <- kenya_admin5[kenya_admin5$county == "Homa Bay", ]
 plot(st_geometry(ROI))
 
 ##########################################################
-#GETTING CLIMATE DATA temp, prec
+#GETTING CLIMATE DATA temperature, precipitation
 ##########################################################
 
 #The following function downloads data from worldclim.org 
@@ -135,7 +135,7 @@ getWC_data(category = "HMWD", product = "prec", period = "2010-2018")
 # Handling climate data
 ##############################################################
 # set the path to download folder or 
-#working directory containing the downloaded files
+# working directory containing the downloaded files
 path <- "/Users/rragankonywa/OneDrive/UniWurzburg/EAGLES/MB12/projects/R_project/_tmax_2010-2018/"
 tif_list <- list.files(path = "/Users/rragankonywa/OneDrive/UniWurzburg/EAGLES/MB12/projects/R_project/_tmax_2010-2018", pattern = ".tif")
 
@@ -147,8 +147,8 @@ pattern_MAMJ <- "([-][0]{1}[3-6]{1})"
 pattern_SOND <-  "([-][1-2]{2})|([-][1][0])|([-][0]{1}[9]{1})"
 
 # these functions organize the files into folder 
-#based on season and return the desired period (MAMJ or SOND)
-#then returns the files to the original folder
+# based on season and return the desired period (MAMJ or SOND)
+# then returns the files to the original folder
 
 fileSorter <- function(path, year, period){
   tif_list <- list.files(path = path, pattern = ".tif")
@@ -251,7 +251,7 @@ getAnualmean <- function(path, season, ROI, df=NULL){
   return(df)
 }
 
-#renames columns of a dataframe to desired names
+# renames columns of a dataframe to desired names
 colRename <- function(df,product, period){
   years <- str_extract(string = names(df),pattern = "([0-9]{4})")
   layernames <- paste0(period,"_",product,"_mean_",years[1]:years[length(years)])
@@ -260,7 +260,7 @@ colRename <- function(df,product, period){
 }
 
 
-#Anual mean maximum temperature 2000-2018
+# Annual mean maximum temperature 2000-2018
 path_tmax <- "/Users/rragankonywa/OneDrive/UniWurzburg/EAGLES/MB12/projects/R_project/data/climate_data/Temperature/tmax_2000-2018"
 MAMJ_tmax_mean_2000_2018 <- getAnualmean(path = path_tmax,season = "MAMJ",ROI = ROI) %>% 
   colRename(product = "tmax",period = "MAMJ")
@@ -268,7 +268,7 @@ MAMJ_tmax_mean_2000_2018 <- getAnualmean(path = path_tmax,season = "MAMJ",ROI = 
 SOND_tmax_mean_2000_2018 <- getAnualmean(path = path_tmax,season = "SOND",ROI = ROI) %>% 
   colRename(product = "tmax",period = "SOND")
 
-#Anual mean minimum temperature 2000-2018
+# Annual mean minimum temperature 2000-2018
 path_tmin <- "/Users/rragankonywa/OneDrive/UniWurzburg/EAGLES/MB12/projects/R_project/data/climate_data/Temperature/tmin_2000-2018"
 MAMJ_tmin_2000_2018_mean <- getAnualmean(path = path_tmin,season = "MAMJ",ROI = ROI) %>% 
   colRename(product = "tmin",period = "MAMJ")
@@ -276,7 +276,7 @@ MAMJ_tmin_2000_2018_mean <- getAnualmean(path = path_tmin,season = "MAMJ",ROI = 
 SOND_tmin_2000_2018_mean <- getAnualmean(path = path_tmin,season = "SOND",ROI = ROI) %>% 
   colRename(product = "tmin",period = "SOND")
 
-#Anual mean precipitation 2000-2018
+# Annual mean precipitation 2000-2018
 path_prec <- "/Users/rragankonywa/OneDrive/UniWurzburg/EAGLES/MB12/projects/R_project/data/climate_data/Precipitation"
 
 MAMJ_prec_2000_2018_mean <- getAnualmean(path = path_prec,season = "MAMJ",ROI = ROI) %>% 
